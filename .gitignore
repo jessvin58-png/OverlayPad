@@ -1,0 +1,5 @@
+*.o
+*.d
+*.dylib
+*.ipa
+src/About/avatar_data.h

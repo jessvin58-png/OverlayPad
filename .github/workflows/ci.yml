@@ -1,0 +1,41 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '**.md'
+      - 'LICENSE*'
+      - '.gitignore'
+      - '.github/**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    env:
+      HOMEBREW_NO_AUTO_UPDATE: 1
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: overlay avatar
+        run: |
+          set -euo pipefail
+          mkdir -p assets
+          for i in 1 2 3; do
+            curl -fsSL --retry 2 --retry-delay 1 \
+              "https://github.com/${{ github.repository_owner }}.png?size=512" \
+              -o assets/avatar.png && [ -s assets/avatar.png ] && break
+            sleep 2
+          done
+          [ -s assets/avatar.png ] || { echo "avatar download failed"; exit 1; }
+          file assets/avatar.png
+          head -c 8 assets/avatar.png | xxd
+
+      - run: brew install ldid
+      - run: make sign
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: OverlayPad.dylib
+          path: OverlayPad.dylib
