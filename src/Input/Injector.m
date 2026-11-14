@@ -22,9 +22,8 @@ static BOOL g_suppress = NO;
             GCInputButtonA, GCInputButtonB, GCInputButtonX, GCInputButtonY,
             GCInputLeftShoulder, GCInputRightShoulder,
             GCInputLeftTrigger, GCInputRightTrigger,
-            GCInputDirectionPad,
-            GCInputButtonMenu, GCInputButtonOptions,
-            nil];
+            GCInputDirectionPad
+          nil];
         g_vc = [[GCVirtualController alloc] initWithConfiguration:cfg];
         if (!g_vc) return;
 
@@ -82,7 +81,6 @@ static BOOL g_suppress = NO;
         GCInputButtonA, GCInputButtonB, GCInputButtonX, GCInputButtonY,
         GCInputLeftShoulder, GCInputRightShoulder,
         GCInputLeftTrigger, GCInputRightTrigger,
-        GCInputButtonMenu, GCInputButtonOptions,
     ];
     for (NSString *e in els) {
         [g_vc updateConfigurationForElement:e
