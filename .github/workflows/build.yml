@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build iOS dylib
-        run: make ARCH=arm64 MIN_IOS=15.0
+        run: make ARCH=arm64 MIN_IOS=15.0 CFLAGS="-UJOY_HAS_AVATAR"
 
       - name: Upload dylib
         uses: actions/upload-artifact@v4
